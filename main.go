@@ -1,22 +1,19 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"gomicro/handlers"
 )
 
 func main() {
-	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-		log.Println("Hello World")
-		d, _ := ioutil.ReadAll(r.Body)
+	l := log.New(os.Stdout, "product-api", log.LstdFlags)
+	handl := handlers.hello(l)
 
-		log.Printf("Data %s/n", d)
-	})
-	http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request) {
-		log.Println("Goodbye World")
+	sm := http.NewServeMux()
+	sm.Handle("/", handl)
 
-	})
 
 	http.ListenAndServe(":9090", nil)
 }
