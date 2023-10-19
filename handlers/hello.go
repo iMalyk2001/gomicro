@@ -5,7 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"github.com/iMalyk2001/gomicro/handlers"
+	
 )
 type Hello struct{
 	l *log.Logger
